@@ -17,7 +17,6 @@
 		18281A441DB8869000B5DF5F /* backgroundDownloadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18281A431DB8869000B5DF5F /* backgroundDownloadUITests.swift */; };
 		18281A521DB88CE900B5DF5F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18281A511DB88CE900B5DF5F /* TableViewCell.swift */; };
 		18281A541DB8A6B600B5DF5F /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18281A531DB8A6B600B5DF5F /* DownloadService.swift */; };
-		18281A561DB8B92800B5DF5F /* NotificationConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18281A551DB8B92800B5DF5F /* NotificationConst.swift */; };
 		5FBF0F02FAF285DF7006284A /* Pods_backgroundDownloadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF0313CD6A598320A088E48 /* Pods_backgroundDownloadTests.framework */; };
 		85EA61CFC3E947C330445F73 /* Pods_backgroundDownload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B639D66AC7DA04FF342E8799 /* Pods_backgroundDownload.framework */; };
 /* End PBXBuildFile section */
@@ -55,7 +54,6 @@
 		18281A451DB8869000B5DF5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18281A511DB88CE900B5DF5F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		18281A531DB8A6B600B5DF5F /* DownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
-		18281A551DB8B92800B5DF5F /* NotificationConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConst.swift; sourceTree = "<group>"; };
 		1C25AB39B13880BFD7C3CF28 /* Pods_backgroundDownloadUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_backgroundDownloadUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54E1C6B712266A40B14AFEA2 /* Pods-backgroundDownloadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-backgroundDownloadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-backgroundDownloadTests/Pods-backgroundDownloadTests.release.xcconfig"; sourceTree = "<group>"; };
 		7BF0313CD6A598320A088E48 /* Pods_backgroundDownloadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_backgroundDownloadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,7 +126,6 @@
 				18281A2C1DB8869000B5DF5F /* LaunchScreen.storyboard */,
 				18281A2F1DB8869000B5DF5F /* Info.plist */,
 				18281A531DB8A6B600B5DF5F /* DownloadService.swift */,
-				18281A551DB8B92800B5DF5F /* NotificationConst.swift */,
 			);
 			path = backgroundDownload;
 			sourceTree = "<group>";
@@ -456,7 +453,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18281A561DB8B92800B5DF5F /* NotificationConst.swift in Sources */,
 				18281A521DB88CE900B5DF5F /* TableViewCell.swift in Sources */,
 				18281A541DB8A6B600B5DF5F /* DownloadService.swift in Sources */,
 				18281A261DB8869000B5DF5F /* ViewController.swift in Sources */,

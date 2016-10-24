@@ -66,18 +66,6 @@ public class TableViewCell: UITableViewCell {
         self.progressLabel.text = String(format: TableViewCell.percentFormat, Int(ceilf(val * 100.0)))
     }
     
-    public func receiveCompletedNotification(notification : Notification) {
-        guard let userInfo = notification.userInfo else {
-            return
-        }
-        
-        let targetId = userInfo["id"] as! Int
-        
-        if targetId == self.id {
-            self.performBtn.isEnabled = false
-        }
-    }
-    
     @IBAction func tappedBtn(sender : UIButton) {
         if let tappedClosure = tappedClosure {
             tappedClosure(self.id)
