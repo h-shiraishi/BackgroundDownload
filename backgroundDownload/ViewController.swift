@@ -106,7 +106,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.downloadList.append(TableViewCellData(id: 2, title: "テスト02", url: "http://ipv4.download.thinkbroadband.com/200MB.zip", progress: 0.0, state: .Waiting))
         self.downloadList.append(TableViewCellData(id: 3, title: "テスト03", url: "http://ipv4.download.thinkbroadband.com/200MB.zip", progress: 0.0, state: .Waiting))
         
-        self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
+        self.tableView.contentInset = UIEdgeInsets.init(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0)
         self.tableView.tableFooterView = UIView()
     }
 
