@@ -6,7 +6,7 @@ target 'backgroundDownload' do
   use_frameworks!
 
   # Pods for backgroundDownload
-  pod 'Alamofire', '~> 4.0'
+  pod 'Alamofire', '~> 4.7'
 
   target 'backgroundDownloadTests' do
     inherit! :search_paths
