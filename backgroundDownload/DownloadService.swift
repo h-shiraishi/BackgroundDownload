@@ -67,7 +67,10 @@ public class DownloadService: NSObject {
                 }
                 
                 if (error as NSError).code == NSURLErrorCancelled {
-                    let query = task.originalRequest!.url!.query!
+                    guard let query = task.originalRequest?.url?.query else {
+                        continue
+                    }
+                    
                     let queryAr = query.components(separatedBy: "&")
                     for keyParam in queryAr {
                         let keyParamAr = keyParam.components(separatedBy: "=")
@@ -75,13 +78,10 @@ public class DownloadService: NSObject {
                             let id = Int(keyParamAr[1])!
                             do {
                                 //plistを保存する
-                                let plist = try PropertyListSerialization.propertyList(from: (((error as NSError).userInfo) as NSDictionary)["NSURLSessionDownloadTaskResumeData"] as! Data, options: [.mutableContainersAndLeaves], format: nil)
+                                let resumeData = (((error as NSError).userInfo) as NSDictionary)["NSURLSessionDownloadTaskResumeData"] as! Data
                                 let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
                                 let fileUrl = cacheURL.appendingPathComponent(String(format : DownloadService.resumeFileFormat, id))
-                                if !(plist as! NSDictionary).write(to: fileUrl, atomically: true) {
-                                    print("plist write error")
-                                    return
-                                }
+                                try resumeData.write(to: fileUrl)
                                 
                                 if let prevDownloadClosure = wself.prevDownloadClosure {
                                     prevDownloadClosure(id)
@@ -89,7 +89,7 @@ public class DownloadService: NSObject {
                                 
                                 wself.resumeDownload(id: id, url: task.originalRequest!.url!.path)
                             } catch {
-                                print("plist read error")
+                                print("plist write error")
                                 continue
                             }
                         }
@@ -155,19 +155,15 @@ public class DownloadService: NSObject {
                 
                 do {
                     //plistを保存する
-                    let plist = try PropertyListSerialization.propertyList(from: resumeData, options: [.mutableContainersAndLeaves], format: nil)
                     let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
                     let fileUrl = cacheURL.appendingPathComponent(String(format : DownloadService.resumeFileFormat, id))
-                    if !(plist as! NSDictionary).write(to: fileUrl, atomically: true) {
-                        print("plist write error")
-                        return
-                    }
+                    try resumeData.write(to: fileUrl)
                     
                     if let pauseClosure = wself.pauseClosure {
                         pauseClosure(id)
                     }
                 } catch {
-                    print("plist read error")
+                    print("plist write error")
                     return
                 }
                 
@@ -264,19 +260,15 @@ public class DownloadService: NSObject {
                 
                 do {
                     //plistを保存する
-                    let plist = try PropertyListSerialization.propertyList(from: resumeData, options: [.mutableContainersAndLeaves], format: nil)
                     let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
                     let fileUrl = cacheURL.appendingPathComponent(String(format : DownloadService.resumeFileFormat, id))
-                    if !(plist as! NSDictionary).write(to: fileUrl, atomically: true) {
-                        print("plist write error")
-                        return
-                    }
+                    try resumeData.write(to: fileUrl)
                     
                     if let pauseClosure = wself.pauseClosure {
                         pauseClosure(id)
                     }
                 } catch {
-                    print("plist read error")
+                    print("plist write error")
                     return
                 }
                 
@@ -342,7 +334,7 @@ public class DownloadService: NSObject {
         // In beta versions, resumeData is NSKeyedArchive encoded instead of plist
         var iresumeDictionary: NSMutableDictionary? = nil
         if #available(iOS 10.0, OSX 10.12, *) {
-            var root : AnyObject? = nil
+            var root : Any? = nil
             let keyedUnarchiver = NSKeyedUnarchiver(forReadingWith: data)
             
             do {
@@ -367,7 +359,7 @@ public class DownloadService: NSObject {
     
     private func correctResumeData(_ data: Data?) -> Data? {
         //データの修正はiOS10以上で行う
-        if !self.laterThanEqualOS(version: 10.0) {
+        if !self.laterThanEqualOS(version: 10.0) || self.laterThanEqualOS(version: 11.0){
             return data
         }
         
